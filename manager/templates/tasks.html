@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div class="container mt-2">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4>Incomplete Tasks</h4>
+                    </div>
+                </div>
+                <div class="card-body border-radius-1">
+                    {% if tasks %}
+                    {% for task in tasks %}
+                        {% if not task.completed %}
+                        <div class="accordion" id="accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="{{task.title}}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{task.id}}" aria-expanded="false" aria-controls="{{task.id}}">
+                                    {{task.title}}
+                                    {% if task.priority_level == 'High' %}
+                                    <span class="badge bg-danger ms-2">{{task.priority_level}}</span>
+                                    {% elif task.priority_level == 'Medium' %}
+                                    <span class="badge bg-warning ms-2">{{task.priority_level}}</span>
+                                    {%elif task.priority_level == 'Low' %}
+                                    <span class="badge bg-success ms-2">{{task.priority_level}}</span>
+                                    {% endif %}
+                                </button>
+                                </h2>
+                                <div id="{{task.id}}" class="accordion-collapse collapse" aria-labelledby="{{task.title}}" data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>{{task.description}}</p>
+                                        <a class="btn btn-primary" href="{% url 'task-update' task.id %}">Update</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% else %}
+                        <h3>There are no tasks at the moment</h3>
+                        <a href="{% url 'task-create' %}" class="btn-large btn-primary">Add task</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h4>Complete Tasks</h4>
+                    </div>
+                </div>
+                
+                <div class="card-body border-radius-1">
+                    {% if tasks %}
+                    {% for task in tasks %}
+                        {% if task.completed %}
+                        <div class="accordion" id="accordion">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="{{task.title}}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{task.id}}" aria-expanded="false" aria-controls="{{task.id}}">
+                                    {{task.title}}
+                                    {% if task.priority_level == 'High' %}
+                                    <span class="badge bg-danger ms-2">{{task.priority_level}}</span>
+                                    {% elif task.priority_level == 'Medium' %}
+                                    <span class="badge bg-warning ms-2">{{task.priority_level}}</span>
+                                    {%elif task.priority_level == 'Low' %}
+                                    <span class="badge bg-success ms-2">{{task.priority_level}}</span>
+                                    {% endif %}
+                                </button>
+                                </h2>
+                                <div id="{{task.id}}" class="accordion-collapse collapse" aria-labelledby="{{task.title}}" data-bs-parent="#accordion">
+                                    <div class="accordion-body">
+                                        <p>{{task.description}}</p>
+                                        <a class="btn btn-primary" href="{% url 'task-update' task.id %}">Update</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% else %}
+                        <h3>There are no tasks at the moment</h3>
+                        <a href="{% url 'task-create' %}" class="btn-large btn-primary">Add task</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
