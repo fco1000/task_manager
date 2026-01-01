@@ -2,6 +2,9 @@
 {% load django_bootstrap5 %}
 {% block content %}
 <div class="container mt-2">
+    <div class="">
+        <a href="{% url 'task-create' %}" class="btn btn-large btn-secondary m-1">Add task</a>
+    </div>
     <div class="row">
         <div class="col">
             <div class="card">

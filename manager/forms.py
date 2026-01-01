@@ -1,5 +1,5 @@
 from django import forms
-from .models import Task
+from .models import Task,Worker
 
 class TaskForm(forms.ModelForm):
     class Meta:
@@ -8,4 +8,8 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'due_date': forms.DateInput(attrs={'type':'date'}),
         }
-        
+
+class WorkerForm(forms.ModelForm):
+    class Meta:
+          model = Worker
+          fields = ['name','email']
