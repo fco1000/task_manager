@@ -10,6 +10,8 @@ class Task(models.Model):
     task_id = models.CharField(max_length=20)
     title = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True, null=True)
+    assigned_worker = models.ForeignKey('Worker', on_delete=models.SET_NULL, null=True, blank=True)
+    date_created = models.DateField(auto_now_add=True, null=True)
     due_date = models.DateField(null=True, blank=True)
     priority_level  = models.CharField(max_length=10, choices=Level.choices,default=Level.Low)
     completed = models.BooleanField(default=False)

@@ -17,7 +17,7 @@
                     {% if tasks %}
                     {% for task in tasks %}
                         {% if not task.completed %}
-                        <div class="accordion" id="accordion">
+                        <div class="accordion mb-1" id="accordion">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="{{task.title}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{task.id}}" aria-expanded="false" aria-controls="{{task.id}}">
@@ -33,7 +33,11 @@
                                 </h2>
                                 <div id="{{task.id}}" class="accordion-collapse collapse" aria-labelledby="{{task.title}}" data-bs-parent="#accordion">
                                     <div class="accordion-body">
+                                        <small class="text-secondary">{{task.date_created}}</small>
                                         <p>{{task.description}}</p>
+                                        <hr>
+                                        <p>Due: {{task.due_date}}</p>
+                                        <p>Assigned to: {{task.assigned_worker}}</p>
                                         <a class="btn btn-primary" href="{% url 'task-update' task.id %}">Update</a>
                                     </div>
                                 </div>
@@ -56,11 +60,12 @@
                     </div>
                 </div>
                 
-                <div class="card-body border-radius-1">
+                <div class="card-body bg-success border-radius-1">
                     {% if tasks %}
                     {% for task in tasks %}
                         {% if task.completed %}
-                        <div class="accordion" id="accordion">
+                        
+                        <div class="accordion mb-1" id="accordion">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="{{task.title}}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{task.id}}" aria-expanded="false" aria-controls="{{task.id}}">
@@ -76,7 +81,11 @@
                                 </h2>
                                 <div id="{{task.id}}" class="accordion-collapse collapse" aria-labelledby="{{task.title}}" data-bs-parent="#accordion">
                                     <div class="accordion-body">
+                                        <small class="text-secondary">{{task.date_created}}</small>
                                         <p>{{task.description}}</p>
+                                        <hr>
+                                        <p>Due: {{task.due_date}}</p>
+                                        <p>Assigned to: <strong>{{task.assigned_worker}}</strong></p>
                                         <a class="btn btn-primary" href="{% url 'task-update' task.id %}">Update</a>
                                     </div>
                                 </div>
